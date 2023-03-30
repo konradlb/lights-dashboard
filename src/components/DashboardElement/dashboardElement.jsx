@@ -7,7 +7,7 @@ import { ReactComponent as Battery } from '../../static/icons/battery.svg';
 import classes from './dashboardElement.module.css';
 
 const DashboardElement = props => {
-    const { element, funs } = props;
+    const { element, funs, loading } = props;
 
     const {
         toggleNV,
@@ -30,9 +30,14 @@ const DashboardElement = props => {
     const indicator5Class =
         power >= 100 ? classes.lightIndicatorOn : classes.lightIndicatorOff;
 
+    const nameElement = loading ? (
+        <div className={classes.ldsDualRing} />
+    ) : (
+        name
+    );
     return (
         <div className={classes.root}>
-            <span className={classes.name}>{name}</span>
+            <div className={classes.name}>{nameElement}</div>
             <div className={classes.lightIndicators}>
                 <div className={indicator1Class} />
                 <div className={indicator2Class} />

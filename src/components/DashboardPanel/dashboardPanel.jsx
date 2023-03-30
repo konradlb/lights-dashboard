@@ -7,6 +7,7 @@ import classes from './dashboardPanel.module.css';
 const DashboardPanel = () => {
     const {
         elements,
+        loading,
         toggleNV,
         toggleDTD,
         toggleFlashing,
@@ -28,6 +29,7 @@ const DashboardPanel = () => {
                   element={element}
                   key={element.id}
                   funs={funs}
+                  loading={loading}
               />
           ))
         : null;
