@@ -6,18 +6,25 @@ import { ReactComponent as Battery } from '../../static/icons/battery.svg';
 
 import classes from './dashboardElement.module.css';
 
-const DashboardElement = props => {
-    const { element, funs, loading } = props;
+const NV = 'nv';
+const DTD = 'dtd';
+const FLASHING = 'flashing';
 
-    const {
-        toggleNV,
-        toggleDTD,
-        toggleFlashing,
-        increasePower,
-        decreasePower
-    } = funs;
+const DashboardElement = props => {
+    const { element, toggleSwitch, increasePower, decreasePower, loading } =
+        props;
 
     const { id, name, nv, dtd, flashing, power, timeLeft } = element;
+
+    const toggleNV = () => {
+        toggleSwitch(id, NV);
+    };
+    const toggleDTD = () => {
+        toggleSwitch(id, DTD);
+    };
+    const toggleFlashing = () => {
+        toggleSwitch(id, FLASHING);
+    };
 
     const indicator1Class =
         power >= 1 ? classes.lightIndicatorOn : classes.lightIndicatorOff;
@@ -74,30 +81,15 @@ const DashboardElement = props => {
                 <div className={classes.switches}>
                     <label className={classes.switch}>
                         <span>Night Vision</span>
-                        <Toggle
-                            checked={nv}
-                            onChange={() => {
-                                toggleNV(id);
-                            }}
-                        />
+                        <Toggle checked={nv} onChange={toggleNV} />
                     </label>
                     <label className={classes.switch}>
                         <span>Dust Till Dawn</span>
-                        <Toggle
-                            checked={dtd}
-                            onChange={() => {
-                                toggleDTD(id);
-                            }}
-                        />
+                        <Toggle checked={dtd} onChange={toggleDTD} />
                     </label>
                     <label className={classes.switch}>
                         <span>Flashing</span>
-                        <Toggle
-                            checked={flashing}
-                            onChange={() => {
-                                toggleFlashing(id);
-                            }}
-                        />
+                        <Toggle checked={flashing} onChange={toggleFlashing} />
                     </label>
                 </div>
             </div>

@@ -86,7 +86,7 @@ const INITIAL_ELEMENTS = [
 
 export const useDashboardPanel = () => {
     const [elements, setElements] = useState(INITIAL_ELEMENTS);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     //simulate connection with server
     const simulateConnection = nextElements => {
@@ -105,7 +105,7 @@ export const useDashboardPanel = () => {
         }
     };
 
-    const toggleStateField = (id, field) => {
+    const toggleSwitch = (id, field) => {
         setLoading(true);
         const nextElements = elements.map(element => {
             if (element.id === id) {
@@ -115,18 +115,6 @@ export const useDashboardPanel = () => {
             }
         });
         simulateConnection(nextElements);
-    };
-
-    const toggleNV = id => {
-        toggleStateField(id, 'nv');
-    };
-
-    const toggleDTD = id => {
-        toggleStateField(id, 'dtd');
-    };
-
-    const toggleFlashing = id => {
-        toggleStateField(id, 'flashing');
     };
 
     const increasePower = id => {
@@ -174,14 +162,10 @@ export const useDashboardPanel = () => {
         simulateConnection(nextElements);
     };
 
-    console.log(loading);
-
     return {
         elements,
         loading,
-        toggleNV,
-        toggleDTD,
-        toggleFlashing,
+        toggleSwitch,
         increasePower,
         decreasePower
     };
