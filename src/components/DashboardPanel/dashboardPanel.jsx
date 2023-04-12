@@ -1,23 +1,16 @@
 import React from 'react';
 
 import DashboardElement from '../DashboardElement';
-import { useDashboardPanel } from '../../talons/DashboardPanel/useDashboardPanel';
+import { useDashboardElementsContext } from '../../context/DashboardElements';
+
 import classes from './dashboardPanel.module.css';
 
 const DashboardPanel = () => {
-    const { elements, loading, toggleSwitch, increasePower, decreasePower } =
-        useDashboardPanel();
+    const [{ elements }] = useDashboardElementsContext();
 
     const dashboardElements = elements.length
         ? elements.map(element => (
-              <DashboardElement
-                  element={element}
-                  key={element.id}
-                  loading={loading}
-                  toggleSwitch={toggleSwitch}
-                  increasePower={increasePower}
-                  decreasePower={decreasePower}
-              />
+              <DashboardElement element={element} key={element.id} />
           ))
         : null;
 

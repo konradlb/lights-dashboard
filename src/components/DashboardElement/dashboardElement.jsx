@@ -2,7 +2,9 @@ import React from 'react';
 
 import Toggle from 'react-toggle';
 import 'react-toggle/style.css';
+
 import { ReactComponent as Battery } from '../../static/icons/battery.svg';
+import { useDashboardElementsContext } from '../../context/DashboardElements';
 
 import classes from './dashboardElement.module.css';
 
@@ -11,10 +13,12 @@ const DTD = 'dtd';
 const FLASHING = 'flashing';
 
 const DashboardElement = props => {
-    const { element, toggleSwitch, increasePower, decreasePower, loading } =
-        props;
+    const { element } = props;
 
     const { id, name, nv, dtd, flashing, power, timeLeft } = element;
+
+    const [{ loading }, { decreasePower, increasePower, toggleSwitch }] =
+        useDashboardElementsContext();
 
     const toggleNV = () => {
         toggleSwitch(id, NV);
